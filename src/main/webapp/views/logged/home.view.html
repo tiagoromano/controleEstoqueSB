@@ -45,7 +45,7 @@
     <!-- /.container-fluid --> 
   </nav> 
   <div ui-view="" class="container-fluid main-view"> 
-    <div id="page-wrapper" ng-init="loadDashboardCharts()"> 
+    <div id="page-wrapper" ng-init="loadDashboard()"> 
       <div class="component-holder ng-binding ng-scope" data-component="crn-datasource" id="crn-datasource-924233"> 
         <datasource name="" entity="" keys="" rows-per-page="100" on-before-create="" on-after-create="" on-before-update="" on-after-update="" on-before-delete="" on-after-delete=""></datasource> 
       </div> 
@@ -66,7 +66,7 @@
                 </div> 
                 <div class="col-xs-9 text-right"> 
                   <div class="huge">
-                     26 
+                     {{dashboard.totalCliente}} 
                   </div> 
                   <div>
                      Cliente(s) 
@@ -91,7 +91,7 @@
                 </div> 
                 <div class="col-xs-9 text-right"> 
                   <div class="huge">
-                     12 
+                     {{dashboard.totalFornecedor}}
                   </div> 
                   <div>
                      Fornecedor(es) 
@@ -116,7 +116,7 @@
                 </div> 
                 <div class="col-xs-9 text-right"> 
                   <div class="huge">
-                     124 
+                     {{dashboard.totalVenda}} 
                   </div> 
                   <div>
                      Venda(s) 
@@ -141,7 +141,7 @@
                 </div> 
                 <div class="col-xs-9 text-right"> 
                   <div class="huge">
-                     13 
+                     {{dashboard.totalProdutoSemEstoque}} 
                   </div> 
                   <div>
                      Produto(s) sem estoque 

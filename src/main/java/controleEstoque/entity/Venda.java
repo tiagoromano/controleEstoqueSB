@@ -48,6 +48,33 @@ public class Venda implements Serializable {
 	
 	
 	/**
+   * @modified
+   */
+  @OneToMany
+  @JoinColumn(name="fk_venda") 
+  private List<VendaItem> vendaItens;
+  
+  /**
+   * @modified
+   */
+  @Transient
+  private Estoque tempEstoque;
+  
+  /**
+   * @modified
+   */
+  @Transient
+  private int tempQtd;
+  
+  public List<VendaItem> getVendaItens() {
+    return this.vendaItens;
+  }
+  
+  public void setVendaItens(List<VendaItem> itens) {
+    this.vendaItens = itens;
+  }
+	
+	/**
 	 * Construtor
 	 * @generated
 	 */

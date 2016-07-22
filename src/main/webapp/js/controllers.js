@@ -49,6 +49,7 @@
     app.controller('HomeController', ['$scope', '$http', '$rootScope', '$state', '$translate', 'Notification', '$location', function ($scope, $http, $rootScope, $state, $translate, Notification, $location) {
         
         $scope.message = {};
+        $scope.dashboard = {};
         
         $scope.selecionado = {
           valor : 1
@@ -137,6 +138,7 @@
           return total;
         }
         
+        
         $scope.changePassword = function () {
 
             var user = { oldPassword: oldPassword.value, newPassword: newPassword.value, newPasswordConfirmation: newPasswordConfirmation.value };
@@ -210,7 +212,7 @@
           
         });
         
-        $scope.loadDashboardCharts = function() {
+        $scope.loadDashboard = function() {
           Morris.Area({
             element: 'morris-area-chart',
             data: [{
@@ -324,6 +326,16 @@
             hideHover: 'auto',
             resize: true
           });
+          
+           $http({
+                method: 'GET',
+                url: 'api/rest/controleEstoque/Custom/DashboardInfo',
+            }).then(
+              function(info) {
+                $scope.dashboard = info.data; 
+              }
+              , function () { });
+          
         }
         
     }]);

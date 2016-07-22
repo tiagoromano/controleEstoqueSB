@@ -16,25 +16,23 @@ import org.springframework.transaction.annotation.*;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
-        entityManagerFactoryRef = "ControleEstoque-EntityManagerFactory",
-        transactionManagerRef = "ControleEstoque-TransactionManager"
+        entityManagerFactoryRef = "controleEstoque-EntityManagerFactory",
+        transactionManagerRef = "controleEstoque-TransactionManager"
 )
 class ControleEstoqueConfiguration {
   
 
-    @Bean(name="ControleEstoque-EntityManagerFactory")
+    @Bean(name="controleEstoque-EntityManagerFactory")
     public LocalEntityManagerFactoryBean entityManagerFactory() {
         LocalEntityManagerFactoryBean factoryBean = new LocalEntityManagerFactoryBean();
         factoryBean.setPersistenceUnitName("controleEstoque");
         return factoryBean;
     }
 
-    @Bean(name = "ControleEstoque-TransactionManager")
+    @Bean(name = "controleEstoque-TransactionManager")
     public PlatformTransactionManager transactionManager() {
         return new JpaTransactionManager(entityManagerFactory().getObject());
     }
 
 
 }
-
-

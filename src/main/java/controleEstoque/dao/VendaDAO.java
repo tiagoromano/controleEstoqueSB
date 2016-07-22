@@ -53,6 +53,14 @@ public interface VendaDAO extends JpaRepository<Venda, java.lang.String> {
   @Query("select v from Venda v")
   public List<Venda> list ( Pageable pageable );
   
+  /**
+   * Lista com paginação de acordo com a NamedQuery
+   * 
+   * @generated
+   */
+  @Query("select count(v.id) from Venda v")
+  public List<Venda> getTotal ( Pageable pageable );
+  
 
   /**
    * OneToMany Relation

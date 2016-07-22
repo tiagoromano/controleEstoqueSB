@@ -101,6 +101,19 @@ public class VendaBusiness {
     // end-user-code        
     return result;
   }
+  /**
+   * Lista com paginação de acordo com a NamedQuery
+   * 
+   * @generated
+   */
+  public List<Venda> getTotal ( Pageable pageable ){
+    // begin-user-code  
+    // end-user-code        
+    List<Venda> result = repository.getTotal (  pageable );
+    // begin-user-code  
+    // end-user-code        
+    return result;
+  }
     
     
 
