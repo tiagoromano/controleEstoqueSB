@@ -1,0 +1,195 @@
+package controleEstoque.rest;
+
+import org.springframework.data.domain.*;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.annotation.*;
+
+import org.springframework.http.*;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.*;
+
+import controleEstoque.entity.*;
+import controleEstoque.business.*;
+
+
+/**
+ * Controller para expor serviços REST de Venda
+ * 
+ * @author Usu�rio de Teste
+ * @version 1.0
+ * @generated
+ **/
+@RestController
+@RequestMapping(value = "/api/rest/controleEstoque/Venda")
+public class VendaREST {
+
+    /**
+     * Classe de negócio para manipulação de dados
+     * 
+     * @generated
+     */
+    @Autowired
+    @Qualifier("VendaBusiness")
+    private VendaBusiness vendaBusiness;
+
+  /**
+   * @generated
+   */
+    @Autowired
+    @Qualifier("EstoqueBusiness")
+    private EstoqueBusiness estoqueBusiness;
+  /**
+   * @generated
+   */
+    @Autowired
+    @Qualifier("VendaItemBusiness")
+    private VendaItemBusiness vendaItemBusiness;
+
+    /**
+     * Serviço exposto para novo registro de acordo com a entidade fornecida
+     * 
+     * @generated
+     */
+    @RequestMapping(method = RequestMethod.POST)
+    public Venda post(@Validated @RequestBody final Venda entity) throws Exception {
+        return vendaBusiness.post(entity);
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade fornecida
+     * 
+     * @generated
+     */
+    @RequestMapping(method = RequestMethod.PUT)
+    public Venda put(@Validated @RequestBody final Venda entity) throws Exception {
+        return vendaBusiness.put(entity);
+    }
+
+    /**
+     * Serviço exposto para salvar alterações de acordo com a entidade e id fornecidos
+     * 
+     * @generated
+     */
+    @RequestMapping(method = RequestMethod.PUT, value = "/{id}")
+    public Venda put(@PathVariable("id") final java.lang.String id, @Validated @RequestBody final Venda entity) throws Exception {
+        return vendaBusiness.put(entity);
+    }
+
+
+    /**
+     * Serviço exposto para remover a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    @RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
+    public void delete(@PathVariable("id") java.lang.String id) throws Exception {
+        vendaBusiness.delete(id);
+    }
+
+
+  /**
+   * NamedQuery list
+   * @generated
+   */
+  @RequestMapping(method = RequestMethod.GET
+  )    
+  public  List<Venda> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
+      return vendaBusiness.list(new PageRequest(offset, limit)   );  
+  }
+
+  /**
+   * OneToMany Relationship GET
+   * @generated
+   */
+  @RequestMapping(method = RequestMethod.GET
+  , value="/{instanceId}/VendaItem")    
+  public List<VendaItem> findVendaItem(@PathVariable("instanceId") java.lang.String instanceId, @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset) {
+    return vendaBusiness.findVendaItem(instanceId,  new PageRequest(offset, limit) );
+  }
+
+  /**
+   * OneToMany Relationship DELETE 
+   * @generated
+   */  
+  @RequestMapping(method = RequestMethod.DELETE
+  , value="/{instanceId}/VendaItem/{relationId}")    
+  public void deleteVendaItem(@PathVariable("relationId") java.lang.String relationId) throws Exception {
+    this.vendaItemBusiness.delete(relationId);
+  }
+  
+  /**
+   * OneToMany Relationship PUT
+   * @generated
+   */  
+  @RequestMapping(method = RequestMethod.PUT
+  , value="/{instanceId}/VendaItem/{relationId}")
+  public VendaItem putVendaItem(@Validated @RequestBody final VendaItem entity, @PathVariable("relationId") java.lang.String relationId) throws Exception {
+	return this.vendaItemBusiness.put(entity);
+  }  
+  
+  /**
+   * OneToMany Relationship POST
+   * @generated
+   */  
+  @RequestMapping(method = RequestMethod.POST
+  , value="/{instanceId}/VendaItem")
+  public VendaItem postVendaItem(@Validated @RequestBody final VendaItem entity, @PathVariable("instanceId") java.lang.String instanceId) throws Exception {
+	Venda venda = this.vendaBusiness.get(instanceId);
+	entity.setVenda(venda);
+	return this.vendaItemBusiness.post(entity);
+  }   
+
+
+  /**
+   * ManyToMany Relationship GET
+   * @generated
+   */
+  @RequestMapping(method = RequestMethod.GET
+  ,value="/{instanceId}/Estoque")
+  public List<Estoque> listEstoque(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
+    return vendaBusiness.listEstoque(instanceId,  new PageRequest(offset, limit) );
+  }
+
+  /**
+   * ManyToMany Relationship POST
+   * @generated
+   */  
+  @RequestMapping(method = RequestMethod.POST
+  ,value="/{instanceId}/Estoque")
+  public Venda postEstoque(@Validated @RequestBody final Estoque entity, @PathVariable("instanceId") java.lang.String instanceId) throws Exception {
+      VendaItem newVendaItem = new VendaItem();
+
+      Venda instance = this.vendaBusiness.get(instanceId);
+
+      newVendaItem.setEstoque(entity);
+      newVendaItem.setVenda(instance);
+      
+      this.vendaItemBusiness.post(newVendaItem);
+
+      return newVendaItem.getVenda();
+  }   
+
+  /**
+   * ManyToMany Relationship DELETE
+   * @generated
+   */  
+  @RequestMapping(method = RequestMethod.DELETE
+  ,value="/{instanceId}/Estoque/{relationId}")
+  public void deleteEstoque(@PathVariable("instanceId") java.lang.String instanceId, @PathVariable("relationId") java.lang.String relationId) {
+	  this.vendaBusiness.deleteEstoque(instanceId, relationId);
+  }  
+
+
+
+    /**
+     * Serviço exposto para recuperar a entidade de acordo com o id fornecido
+     * 
+     * @generated
+     */
+    @RequestMapping(method = RequestMethod.GET, value = "/{id}")
+    public Venda get(@PathVariable("id") java.lang.String id) throws Exception {
+        return vendaBusiness.get(id);
+    }
+}
