@@ -113,6 +113,9 @@
         }
         
         $scope.fecharVenda = function() {
+          
+          //TODO: Fazer uma validacao da quantidade de estoque antes de submeter. Venda.active.quantidade VS Venda.active.estoque.quantidade
+          
           var errors = '';
           if (!Venda.active.vendaItens || Venda.active.vendaItens.length === 0) {
             errors+=$translate.instant('Home.view.Venda.AtLeastOneProduct')+'<br/>';
