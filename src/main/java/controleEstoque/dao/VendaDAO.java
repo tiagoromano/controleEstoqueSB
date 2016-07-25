@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.*;
  * 
  * @see org.springframework.data.jpa.repository.JpaRepository
  * 
- * @generated
+ * @modified
  */
 @Repository("VendaDAO")
 @Transactional(transactionManager="controleEstoque-TransactionManager")

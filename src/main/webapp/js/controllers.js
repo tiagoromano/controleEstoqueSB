@@ -112,14 +112,46 @@
           Venda.active.vendaItens.push( { estoque: estoque, quantidade: qtd  } );
         }
         
+        var key = function(obj){
+          return obj.id;
+        };
+        
         $scope.fecharVenda = function() {
-          
-          //TODO: Fazer uma validacao da quantidade de estoque antes de submeter. Venda.active.quantidade VS Venda.active.estoque.quantidade
           
           var errors = '';
           if (!Venda.active.vendaItens || Venda.active.vendaItens.length === 0) {
             errors+=$translate.instant('Home.view.Venda.AtLeastOneProduct')+'<br/>';
           }
+          
+          if (Venda.inserting) {
+            var stockByProduct = [];
+            var totalAddedByProduct = {};
+            for (var i=0; i < Venda.active.vendaItens.length; i++ ) {
+              var alreadyAdded = false;
+              $(stockByProduct).each(function() { 
+                if ((this).id === Venda.active.vendaItens[i].estoque.id) {
+                  alreadyAdded = true;
+                  return;
+                }
+              });
+              if (!alreadyAdded)
+                stockByProduct.push(Venda.active.vendaItens[i].estoque);
+              
+              if (totalAddedByProduct[key(Venda.active.vendaItens[i].estoque)])
+                totalAddedByProduct[key(Venda.active.vendaItens[i].estoque)] += Venda.active.vendaItens[i].quantidade;
+              else
+                totalAddedByProduct[key(Venda.active.vendaItens[i].estoque)] = Venda.active.vendaItens[i].quantidade;
+            }
+            
+            var errorStockExceeded = $translate.instant('Home.view.Venda.StockError')+ '<br/>';
+            $(stockByProduct).each(function() {
+              if (this.quantidade < totalAddedByProduct[this.id])
+                errors+=  errorStockExceeded
+                          .replace('{0}', this.produto.marca+' - '+this.produto.descricao)
+                          .replace('{1}', this.quantidade);
+            });
+          }
+          
           if (errors.length > 0) {
             Notification.error(errors); 
             return;
@@ -212,7 +244,6 @@
               catch (e) { }
             }
           );
-          
         });
         
         $scope.loadDashboard = function() {

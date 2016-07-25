@@ -12,13 +12,14 @@ import java.util.*;
 
 import controleEstoque.entity.*;
 import controleEstoque.business.*;
+import controleEstoque.entity.Estoque;
 
 /**
  * Controller para expor serviços REST de Venda
  * 
  * @author Usu�rio de Teste
  * @version 1.0
- * @generated
+ * @modified
  **/
 @RestController
 @RequestMapping(value = "/api/rest/controleEstoque/Venda")
@@ -53,13 +54,16 @@ public class VendaREST {
 	/**
 	 * Serviço exposto para novo registro de acordo com a entidade fornecida
 	 * 
-	 * @generated
+	 * @modified
 	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public Venda post(@Validated @RequestBody final Venda entity) throws Exception {
-	  String a = "ok";
-	  if (a.equals("ok"))
-	    throw new Exception("Erro, tiago teste");
+
+		for (VendaItem v : entity.getVendaItens()) {
+			Estoque est = estoqueBusiness.get(v.getEstoque().getId());
+			est.setQuantidade(est.getQuantidade() - v.getQuantidade());
+			estoqueBusiness.put(est);
+		}
 		return vendaBusiness.post(entity);
 	}
 
