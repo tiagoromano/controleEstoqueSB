@@ -10,6 +10,9 @@ import controleEstoque.dao.*;
 import controleEstoque.entity.*;
 import java.util.*;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 
 
 /**
@@ -28,7 +31,7 @@ public class ProdutoBusiness {
     @Autowired
     @Qualifier("ProdutoDAO")
     protected ProdutoDAO repository;
-
+    
     // CRUD
 
     /**

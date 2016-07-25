@@ -369,6 +369,16 @@
                 $scope.dashboard = info.data; 
               }
               , function () { });
+              
+              
+            $http({
+                method: 'GET',
+                url: 'api/rest/controleEstoque/Custom/Faturamento',
+            }).then(
+              function(info) {
+                $scope.dashboard = info.data; 
+              }
+              , function () { });
           
         }
         

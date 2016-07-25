@@ -6,6 +6,7 @@ import org.springframework.stereotype.*;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.domain.*;
 import org.springframework.data.repository.query.*;
+import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.*;
 
 @Repository("CustomDAO")
@@ -30,4 +31,9 @@ public interface CustomDAO extends JpaRepository<Venda, java.lang.String>{
   
   @Query("select count(f.id) from Fornecedor f")
   public Long getTotalFornecedor();
+  
+  /*
+  @Query("select sum(e.valorvenda * vi.quantidade) vendadia, v.datavenda from VendaItem vi join Venda v on (vi.fk_venda = v.id) join Estoque e on (vi.fk_estoque = e.id) where v.datavenda >= '2016-07-01' and v.datavenda <= '2016-07-31' group by v.datavenda order by v.datavenda")
+  public List<FaturamentoInfoDTO> getFaturamentoMes();
+  */
 }

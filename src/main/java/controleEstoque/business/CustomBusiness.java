@@ -4,7 +4,7 @@ import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.data.domain.*;
-
+import org.springframework.http.ResponseEntity;
 
 import controleEstoque.dao.*;
 import controleEstoque.entity.*;
@@ -33,5 +33,8 @@ public class CustomBusiness {
 	  return repository.getTotalFornecedor();
 	}
 	
+/*	public List<FaturamentoInfoDTO> getFaturamentoMes() {
+	  return repository.getFaturamentoMes();
+	}*/
 
 }
