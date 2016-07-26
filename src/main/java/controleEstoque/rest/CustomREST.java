@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import controleEstoque.business.CustomBusiness;
-import controleEstoque.business.ProdutoBusiness;
 import controleEstoque.entity.DashboardInfoDTO;
 import controleEstoque.entity.FaturamentoInfoDTO;
 import controleEstoque.entity.LabelValueDTO;
@@ -31,9 +30,6 @@ public class CustomREST {
 	@Autowired
 	@Qualifier("CustomBusiness")
 	private CustomBusiness customBusiness;
-	
-	@Autowired
-	private ProdutoBusiness produtoBusiness;
 	
 	@PersistenceContext(unitName = "controleEstoque")
   private EntityManager entityManager;
@@ -79,8 +75,6 @@ public class CustomREST {
 	@RequestMapping(method = RequestMethod.GET, value = "/ProdutoEstoque")
 	public List<LabelValueDTO> getProdutoEstoque() throws Exception {
 	  
-    Date dateStart = getFirstDayOfMonth();
-    Date dateEnd = getLastDayOfMonth();
 	 
 	  Query query = entityManager
 	  .createQuery("select CONCAT(e.produto.marca, ' - ',e.produto.descricao), e.quantidade "+

@@ -11,15 +11,8 @@ import org.springframework.transaction.annotation.*;
 
 @Repository("CustomDAO")
 @Transactional(transactionManager="controleEstoque-TransactionManager")
-//public interface CustomDAO extends JpaRepository{
 public interface CustomDAO extends JpaRepository<Venda, java.lang.String>{
 
-	/**
-	 * Construtor
-	 **/
-	
-	//ResponseEntity<String> 
-	
 	@Query("select count(v.id) from Venda v")
   public Long getTotalVenda();
   
