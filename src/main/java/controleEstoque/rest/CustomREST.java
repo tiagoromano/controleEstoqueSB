@@ -22,6 +22,7 @@ import controleEstoque.business.CustomBusiness;
 import controleEstoque.business.ProdutoBusiness;
 import controleEstoque.entity.DashboardInfoDTO;
 import controleEstoque.entity.FaturamentoInfoDTO;
+import controleEstoque.entity.LabelValueDTO;
 
 @RestController
 @RequestMapping(value = "/api/rest/controleEstoque/Custom")
@@ -73,6 +74,26 @@ public class CustomREST {
 	    listFat.add(f);
     }
 	  return listFat;
+	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/ProdutoEstoque")
+	public List<LabelValueDTO> getProdutoEstoque() throws Exception {
+	  
+    Date dateStart = getFirstDayOfMonth();
+    Date dateEnd = getLastDayOfMonth();
+	 
+	  Query query = entityManager
+	  .createQuery("select CONCAT(e.produto.marca, ' - ',e.produto.descricao), e.quantidade "+
+	               "from Estoque e ");
+	  Vector<Object> results = (Vector<Object>)query.getResultList();
+	  List<LabelValueDTO> list = new ArrayList<LabelValueDTO>();
+	  for (Object object : results) {
+	    LabelValueDTO l = new LabelValueDTO();
+	    l.label = (String)((Object[])object)[0];
+	    l.value = String.valueOf((Long)((Object[])object)[1]);
+	    list.add(l);
+    }
+	  return list;
 	}
 	
 	private Date getLastDayOfMonth() {

@@ -50,6 +50,7 @@
         
         $scope.message = {};
         $scope.dashboard = {};
+        $scope.faturamento = [];
         
         $scope.selecionado = {
           valor : 1
@@ -123,7 +124,7 @@
             errors+=$translate.instant('Home.view.Venda.AtLeastOneProduct')+'<br/>';
           }
           
-          if (Venda.inserting) {
+          if (Venda.inserting && Venda.active.vendaItens) {
             var stockByProduct = [];
             var totalAddedByProduct = {};
             for (var i=0; i < Venda.active.vendaItens.length; i++ ) {
@@ -217,7 +218,31 @@
           navMain.off("click", "a", closeMenuHandler);
           navMain.on("click", "a", closeMenuHandler);
           
+          if ($('#morris-bar-chart').length && !$('#morris-bar-chart').data('started')) {
+            $('#morris-bar-chart').data('started',true);
+            $scope.loadDashboard();
+          }
           
+          
+          if ($location.search().start && $scope.Venda) {
+            if (!$scope.Venda.inserting) {
+              var handleStart = $('#btnNewVenda');
+              var intervalStartInserting  = setInterval(function() {
+                if ($scope.getTotalVenda() > 0) {
+                  try {
+                    handleStart.trigger('click');
+                  }catch (e) {}
+                }
+                else
+                  clearInterval(intervalStartInserting);
+              },50);
+             
+            }
+          }
+          else if ($scope.Venda)
+            $scope.Venda.cancel();
+          
+          /*
           $scope.$watch(
             function () {
               return location.hash
@@ -227,15 +252,6 @@
                 if ($location.search().start && Venda) {
                   if (!$scope.Venda.inserting) {
                     var started;
-                    var intervalStartInserting  = setInterval(function() {
-                      if (!started) {
-                        try {
-                          started = $('#btnNewVenda').trigger('click');
-                        }catch (e) { started = null; }
-                      }
-                      else
-                        clearInterval(intervalStartInserting);
-                    },10);
                   }
                 }
                 else if (Venda)
@@ -243,90 +259,12 @@
               }
               catch (e) { }
             }
-          );
+          );*/
         });
         
         $scope.loadDashboard = function() {
-          /*
-          Morris.Area({
-            element: 'morris-area-chart',
-            data: [{
-                period: '2010 Q1',
-                iphone: 2666,
-                ipad: null,
-                itouch: 2647
-            }, {
-                period: '2010 Q2',
-                iphone: 2778,
-                ipad: 2294,
-                itouch: 2441
-            }, {
-                period: '2010 Q3',
-                iphone: 4912,
-                ipad: 1969,
-                itouch: 2501
-            }, {
-                period: '2010 Q4',
-                iphone: 3767,
-                ipad: 3597,
-                itouch: 5689
-            }, {
-                period: '2011 Q1',
-                iphone: 6810,
-                ipad: 1914,
-                itouch: 2293
-            }, {
-                period: '2011 Q2',
-                iphone: 5670,
-                ipad: 4293,
-                itouch: 1881
-            }, {
-                period: '2011 Q3',
-                iphone: 4820,
-                ipad: 3795,
-                itouch: 1588
-            }, {
-                period: '2011 Q4',
-                iphone: 15073,
-                ipad: 5967,
-                itouch: 5175
-            }, {
-                period: '2012 Q1',
-                iphone: 10687,
-                ipad: 4460,
-                itouch: 2028
-            }, {
-                period: '2012 Q2',
-                iphone: 8432,
-                ipad: 5713,
-                itouch: 1791
-            }],
-            xkey: 'period',
-            ykeys: ['iphone', 'ipad', 'itouch'],
-            labels: ['iPhone', 'iPad', 'iPod Touch'],
-            pointSize: 2,
-            hideHover: 'auto',
-            resize: true
-          });
-          */
-          Morris.Donut({
-            element: 'morris-donut-chart',
-            data: [{
-                label: "Download Sales",
-                value: 12
-            }, {
-                label: "In-Store Sales",
-                value: 30
-            }, {
-                label: "Mail-Order Sales",
-                value: 20
-            }],
-            resize: true
-          });
-    
-         
           
-           $http({
+            $http({
                 method: 'GET',
                 url: 'api/rest/controleEstoque/Custom/DashboardInfo',
             }).then(
@@ -335,13 +273,13 @@
               }
               , function () { });
               
-              
             $http({
                 method: 'GET',
                 url: 'api/rest/controleEstoque/Custom/Faturamento',
             }).then(
               function(info) {
-                //$scope.dashboard = info.data;
+                
+                $scope.faturamento = info.data;
                 
                 Morris.Area({
                   element: 'morris-area-chart',
@@ -356,23 +294,6 @@
                 
                 Morris.Bar({
                   element: 'morris-bar-chart',
-                  /*data: [{
-                      y: '2016-07-22',
-                      a: 100,
-                      b: 90
-                  }, {
-                      y: '2016-07-23',
-                      a: 75,
-                      b: 65
-                  }, {
-                      y: '2016-07-24',
-                      a: 50,
-                      b: 40
-                  }, {
-                      y: '2016-07-26',
-                      a: 75,
-                      b: 65
-                  }],*/
                   data: info.data,
                   xkey: 'dataVendaFormat',
                   ykeys: ['valorCompraDia', 'valorVendaDia'],
@@ -382,7 +303,19 @@
                 });
               }
               , function () { });
-          
+              
+            $http({
+                method: 'GET',
+                url: 'api/rest/controleEstoque/Custom/ProdutoEstoque',
+            }).then(
+              function(info) {
+                Morris.Donut({
+                  element: 'morris-donut-chart',
+                  data: info.data,
+                  resize: true
+                });
+              }
+              , function () { });
         }
         
     }]);
