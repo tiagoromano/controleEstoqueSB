@@ -15,8 +15,10 @@ import java.util.Date;
 
 public class FaturamentoInfoDTO {
 
-  public double vendadia;
-  public Date datavenda;
+  public double valorVendaDia;
+  public double valorCompraDia;
+  public Date dataVenda;
+  public String dataVendaFormat; 
 
 
 }

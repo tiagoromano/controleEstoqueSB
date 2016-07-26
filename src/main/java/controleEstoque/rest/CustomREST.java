@@ -1,17 +1,19 @@
 package controleEstoque.rest;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Vector;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,46 +49,40 @@ public class CustomREST {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/Faturamento")
-	public void getFaturamentoMes() throws Exception {
+	public List<FaturamentoInfoDTO> getFaturamentoMes() throws Exception {
 	  
-    Date dateIni = getFirstDayOfMonth();
-    Date dateEnd = getLastDayOfMonth(dateIni.getMonth(), dateIni.getYear());
-	  
-	  
+    Date dateStart = getFirstDayOfMonth();
+    Date dateEnd = getLastDayOfMonth();
+	 
 	  Query query = entityManager
-	  .createQuery("select SUM(vi.quantidade * vi.estoque.valorVenda), vi.venda.dataVenda "+
+	  .createQuery("select SUM(vi.quantidade * vi.estoque.valorVenda), vi.venda.dataVenda, SUM(vi.quantidade * vi.estoque.valorCompra) "+
 	               "from VendaItem vi "+
-	               "where vi.venda.dataVenda >= :dataIni and vi.venda.dataVenda <= :dataFim  "+
-	               "group by vi.venda.dataVenda ")
-	               .setParameter("dataIni", dateIni)
+	               "where vi.venda.dataVenda >= :dateStart and vi.venda.dataVenda <= :dateEnd "+
+	               "group by vi.venda.dataVenda " +
+	               "order by vi.venda.dataVenda")
+	               .setParameter("dateStart", dateStart)
 	               .setParameter("dateEnd", dateEnd);
-	  //.createQuery("select SUM(vi.quantidade * vi.estoque.valorVenda), vi.venda.datavenda from VendaItem vi group by vi.venda.datavenda ");
-	  /*.createQuery("select sum(e.valorvenda * vi.quantidade) vendadia, v.datavenda from VendaItem vi " +
-	              "join Venda v on (vi.fk_venda = v.id) " + 
-	              "join Estoque e on (vi.fk_estoque = e.id) " +
-	              "where v.datavenda >= '2016-07-01' and v.datavenda <= '2016-07-31' "+
-	              "group by v.datavenda order by v.datavenda");*/
-	  //Object results = query.getSingleResult();
-	  Object results = query.getResultList();
-	  
-	  //Object[] results = (Object[]) query.getSingleResult();
-
-    //for (Object object : results) {
-    //    System.out.println(object);
-    //}
-	  
-	  
-	 // List<ResponseEntity<FaturamentoInfoDTO>>test = customBusiness.getFaturamentoMes();
-	  //return null;
-	  String teste = "ok";
+	  Vector<Object> results = (Vector<Object>)query.getResultList();
+	  List<FaturamentoInfoDTO> listFat = new ArrayList<FaturamentoInfoDTO>();
+	  for (Object object : results) {
+	    FaturamentoInfoDTO f = new FaturamentoInfoDTO();
+	    f.valorVendaDia = (Double)((Object[])object)[0];
+	    f.dataVenda = (Date)((Object[])object)[1];
+	    f.valorCompraDia = (Double)((Object[])object)[2];
+	    f.dataVendaFormat = getDateFormated(f.dataVenda);
+	    listFat.add(f);
+    }
+	  return listFat;
 	}
 	
-	private Date getLastDayOfMonth(int month, int year) {
-    Calendar calendar = Calendar.getInstance();
-    // passing month-1 because 0-->jan, 1-->feb... 11-->dec
-    calendar.set(year, month - 1, 1);
-    calendar.set(Calendar.DATE, calendar.getActualMaximum(Calendar.DATE));
-    return calendar.getTime();
+	private Date getLastDayOfMonth() {
+	  Date currentDate = new Date();
+	  Date dt = new Date(currentDate.getYear(), currentDate.getMonth(), 1);
+	  Calendar c = Calendar.getInstance(); 
+    c.setTime(dt); 
+    c.add(Calendar.MONTH, 1);
+    c.add(Calendar.DAY_OF_MONTH, -1);
+    return new Date(currentDate.getYear(), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
   }
   
   private Date getFirstDayOfMonth() {
@@ -94,4 +90,10 @@ public class CustomREST {
     return new Date(currentDate.getYear(), currentDate.getMonth(), 1);
   }
 
+  private String getDateFormated(Date date) {
+    //Locale local = new Locale("pt","BR");
+    //DateFormat dateFormat = new SimpleDateFormat("dd 'de' MMMM 'de' yyyy",local);
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); 
+    return dateFormat.format(date);
+  }
 }
