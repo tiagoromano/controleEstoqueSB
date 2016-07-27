@@ -55,7 +55,7 @@ var app = (function() {
             controller: 'HomeController',
             templateUrl: 'views/logged/home.view.html'
           })
-          
+
           .state('home.pages', {
             url: "/{name:.*}",
             controller: 'PageController',
@@ -147,8 +147,6 @@ var app = (function() {
           $scope.params[key] = queryStringParams[key];
         }
       }
-      
-      
     }])
     
     .run(function($rootScope,$state) {
@@ -167,3 +165,7 @@ var app = (function() {
 }(window));
 
 app.userEvents = {};
+
+//Configuration
+app.config = {};
+app.config.datasourceApiVersion = 2;

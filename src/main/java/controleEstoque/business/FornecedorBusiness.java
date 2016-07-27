@@ -93,10 +93,10 @@ public class FornecedorBusiness {
    * 
    * @generated
    */
-  public List<Fornecedor> list ( Pageable pageable ){
+  public Page<Fornecedor> list ( Pageable pageable ){
     // begin-user-code  
     // end-user-code        
-    List<Fornecedor> result = repository.list (  pageable );
+    Page<Fornecedor> result = repository.list (  pageable );
     // begin-user-code  
     // end-user-code        
     return result;
@@ -108,10 +108,10 @@ public class FornecedorBusiness {
    * @generated modifiable
    * OneToMany Relation
    */  
-  public List<Estoque> findEstoque(java.lang.String id,  Pageable pageable) {
+  public Page<Estoque> findEstoque(java.lang.String id,  Pageable pageable) {
       // begin-user-code
       // end-user-code  
-      List<Estoque> result = repository.findEstoque(id,  pageable );
+      Page<Estoque> result = repository.findEstoque(id,  pageable );
       // begin-user-code  
       // end-user-code        
       return result;	  
@@ -123,10 +123,10 @@ public class FornecedorBusiness {
    * @generated modifiable
    * ManyToMany Relation
    */  
-  public List<Produto> listProduto(java.lang.String id,  Pageable pageable ) {
+  public Page<Produto> listProduto(java.lang.String id,  Pageable pageable ) {
       // begin-user-code
       // end-user-code  
-      List<Produto> result = repository.listProduto(id,  pageable );
+      Page<Produto> result = repository.listProduto(id,  pageable );
       // begin-user-code
       // end-user-code
       return result;        	  

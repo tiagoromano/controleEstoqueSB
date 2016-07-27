@@ -93,10 +93,10 @@ public class ClienteBusiness {
    * 
    * @generated
    */
-  public List<Cliente> list ( Pageable pageable ){
+  public Page<Cliente> list ( Pageable pageable ){
     // begin-user-code  
     // end-user-code        
-    List<Cliente> result = repository.list (  pageable );
+    Page<Cliente> result = repository.list (  pageable );
     // begin-user-code  
     // end-user-code        
     return result;
@@ -108,10 +108,10 @@ public class ClienteBusiness {
    * @generated modifiable
    * OneToMany Relation
    */  
-  public List<Venda> findVenda(java.lang.String id,  Pageable pageable) {
+  public Page<Venda> findVenda(java.lang.String id,  Pageable pageable) {
       // begin-user-code
       // end-user-code  
-      List<Venda> result = repository.findVenda(id,  pageable );
+      Page<Venda> result = repository.findVenda(id,  pageable );
       // begin-user-code  
       // end-user-code        
       return result;	  

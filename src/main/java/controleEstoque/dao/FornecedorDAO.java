@@ -51,7 +51,7 @@ public interface FornecedorDAO extends JpaRepository<Fornecedor, java.lang.Strin
    * @generated
    */
   @Query("select f from Fornecedor f")
-  public List<Fornecedor> list ( Pageable pageable );
+  public Page<Fornecedor> list ( Pageable pageable );
   
 
   /**
@@ -59,7 +59,7 @@ public interface FornecedorDAO extends JpaRepository<Fornecedor, java.lang.Strin
    * @generated
    */
   @Query("SELECT entity FROM Estoque entity WHERE entity.fornecedor.id = :id")
-  public List<Estoque> findEstoque(@Param(value="id") java.lang.String id,  Pageable pageable );
+  public Page<Estoque> findEstoque(@Param(value="id") java.lang.String id,  Pageable pageable );
 
 
 
@@ -68,7 +68,7 @@ public interface FornecedorDAO extends JpaRepository<Fornecedor, java.lang.Strin
    * @generated
    */
   @Query("SELECT entity.produto FROM Estoque entity WHERE entity.fornecedor.id = :id")
-  public List<Produto> listProduto(@Param(value="id") java.lang.String id,  Pageable pageable);
+  public Page<Produto> listProduto(@Param(value="id") java.lang.String id,  Pageable pageable);
 
     /**
      * ManyToOne Relation Delete

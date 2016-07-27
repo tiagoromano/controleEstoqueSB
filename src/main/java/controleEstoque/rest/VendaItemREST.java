@@ -3,6 +3,8 @@ package controleEstoque.rest;
 import org.springframework.data.domain.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.*;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.PagedResources;
 
 import org.springframework.http.*;
 import org.springframework.beans.factory.annotation.*;
@@ -83,8 +85,8 @@ public class VendaItemREST {
    */
   @RequestMapping(method = RequestMethod.GET
   )    
-  public  List<VendaItem> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return vendaItemBusiness.list(new PageRequest(offset, limit)   );  
+  public  HttpEntity<PagedResources<VendaItem>> listParams (Pageable pageable, PagedResourcesAssembler assembler){
+      return new ResponseEntity<>(assembler.toResource(vendaItemBusiness.list(pageable   )), HttpStatus.OK);    
   }
 
 

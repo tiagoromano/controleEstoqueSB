@@ -31,6 +31,7 @@ angular.module('datasourcejs', [])
     this._activeValues = null;
     this.errorMessage = "";
     this.onError = null;
+    this.links = null;
 
     // Private members
     var cursor = 0;
@@ -42,9 +43,9 @@ angular.module('datasourcejs', [])
     var unregisterDataWatch = null;
     
     // Public methods
-	/**
-	* Initialize a single datasource
-	*/
+  	/**
+  	* Initialize a single datasource
+  	*/
     this.init = function() {
 
       var dsScope = this;
@@ -237,16 +238,19 @@ angular.module('datasourcejs', [])
         service.update(url, obj).$promise.then(callback);        
     };
 
+    /**
+     * Valid if required field is valid 
+     */
     this.missingRequiredField = function() {
       return $('input[required]').hasClass('ng-invalid-required') || $('input[required]').hasClass('ng-invalid')
       ||  $('input[required]').hasClass('ng-empty');
     }
     
-
     /**
     * Insert or update based on the the datasource state
     */ 
     this.post = function () {
+      
       if (this.missingRequiredField())
         return;
       
@@ -488,11 +492,17 @@ angular.module('datasourcejs', [])
       if(!this.hasNextPage()) {
         return;
       }
-      this.offset = parseInt(this.offset) + parseInt(this.rowsPerPage); 
+      if (this.apiVersion == 1) {
+        this.offset = parseInt(this.offset) + parseInt(this.rowsPerPage); 
+      } else {
+        this.offset = parseInt(this.offset) + 1; 
+      }
       this.fetch(_savedProps, { 
         success: function(data) {
           if(!data || data.length < parseInt(this.rowsPerPage)) {
-            this.offset = parseInt(this.offset) - this.data.length; 
+            if (this.apiVersion == 1) {
+              this.offset = parseInt(this.offset) - this.data.length; 
+            }
           }
         }
       }, true);
@@ -605,6 +615,16 @@ angular.module('datasourcejs', [])
     this.current = function () {
       return this.active || this.data[0];
     };
+    
+    this.getLink = function(rel) {
+      if (this.links) {
+        for (var i=0;i<this.links.length;i++) {
+          if (this.links[i].rel == rel) {
+            return this.links[i].href;
+          }
+        }
+      }
+    }
 
     /**
     *  Fetch all data from the server
@@ -628,8 +648,13 @@ angular.module('datasourcejs', [])
       
       // Set Limit and offset
       if(this.rowsPerPage > 0) {
-        props.params.limit = this.rowsPerPage;
-        props.params.offset = this.offset;
+        if (this.apiVersion == 1) {
+          props.params.limit = this.rowsPerPage;
+          props.params.offset = this.offset;
+        } else {
+          props.params.size = this.rowsPerPage;
+          props.params.page = this.offset;
+        }
       }
 
       // Stop auto post for awhile
@@ -661,7 +686,12 @@ angular.module('datasourcejs', [])
           if(data) {
             
             if(Object.prototype.toString.call( data ) !== '[object Array]' ) {
-              data = [data];
+              if (data && data.links && Object.prototype.toString.call(data.content) === '[object Array]') {
+                this.links = data.links;
+                data = data.content;
+              } else {
+                data = [data];
+              }
             }
             
             // Call the before fill callback
@@ -701,6 +731,9 @@ angular.module('datasourcejs', [])
              
             if(callbacks.success) callbacks.success.call(this, data);
             hasMoreResults = (data.length >= this.rowsPerPage);
+            if (this.apiVersion == 2) {
+              hasMoreResults = this.getLink("next") != null;
+            }
             /* 
             *  Register a watcher for data
             *  if the autopost property was set
@@ -824,6 +857,7 @@ angular.module('datasourcejs', [])
     }
     
     this.init();
+    
   };
 
   /**
@@ -841,6 +875,11 @@ angular.module('datasourcejs', [])
 
       var dts = new DataSet(props.name, scope);
       dts.entity = props.entity;
+      var defaultApiVersion = 1;
+      if (app && app.config && app.config.datasourceApiVersion) {
+        defaultApiVersion = app.config.datasourceApiVersion;
+      }
+      dts.apiVersion = props.apiVersion ? parseInt(props.apiVersion) : defaultApiVersion;
       dts.keys = (props.keys && props.keys.length > 0) ? props.keys.split(",") : [];
       dts.rowsPerPage = props.rowsPerPage ? props.rowsPerPage : 100; // Default 100 rows per page
       dts.append = props.append;
@@ -951,6 +990,7 @@ angular.module('datasourcejs', [])
         var props = {
           name: attrs.name,
           entity: attrs.entity,
+          apiVersion : attrs.apiVersion,
           enabled: (attrs.hasOwnProperty('enabled')) ? (attrs.enabled === "true") : true,
           keys: attrs.keys,
           endpoint: attrs.endpoint,

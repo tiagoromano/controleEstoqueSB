@@ -10,9 +10,6 @@ import controleEstoque.dao.*;
 import controleEstoque.entity.*;
 import java.util.*;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
 
 
 /**
@@ -31,7 +28,7 @@ public class ProdutoBusiness {
     @Autowired
     @Qualifier("ProdutoDAO")
     protected ProdutoDAO repository;
-    
+
     // CRUD
 
     /**
@@ -96,10 +93,10 @@ public class ProdutoBusiness {
    * 
    * @generated
    */
-  public List<Produto> list ( Pageable pageable ){
+  public Page<Produto> list ( Pageable pageable ){
     // begin-user-code  
     // end-user-code        
-    List<Produto> result = repository.list (  pageable );
+    Page<Produto> result = repository.list (  pageable );
     // begin-user-code  
     // end-user-code        
     return result;
@@ -111,10 +108,10 @@ public class ProdutoBusiness {
    * @generated modifiable
    * OneToMany Relation
    */  
-  public List<Estoque> findEstoque(java.lang.String id,  Pageable pageable) {
+  public Page<Estoque> findEstoque(java.lang.String id,  Pageable pageable) {
       // begin-user-code
       // end-user-code  
-      List<Estoque> result = repository.findEstoque(id,  pageable );
+      Page<Estoque> result = repository.findEstoque(id,  pageable );
       // begin-user-code  
       // end-user-code        
       return result;	  
@@ -126,10 +123,10 @@ public class ProdutoBusiness {
    * @generated modifiable
    * ManyToMany Relation
    */  
-  public List<Fornecedor> listFornecedor(java.lang.String id,  Pageable pageable ) {
+  public Page<Fornecedor> listFornecedor(java.lang.String id,  Pageable pageable ) {
       // begin-user-code
       // end-user-code  
-      List<Fornecedor> result = repository.listFornecedor(id,  pageable );
+      Page<Fornecedor> result = repository.listFornecedor(id,  pageable );
       // begin-user-code
       // end-user-code
       return result;        	  

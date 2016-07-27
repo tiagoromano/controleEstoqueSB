@@ -37,7 +37,6 @@
             
             // Redirect to home page
             $state.go("home");
-            
         }
 
         function handleError(data, status, headers, config) {
@@ -91,11 +90,12 @@
             $state.go("login");
         }
 
+
         function handleError(error) {
             $rootScope.session.error = error;
         }
         
-        $scope.addVendaItem = function(estoque, qtd) {
+         $scope.addVendaItem = function(estoque, qtd) {
           var errors = '';
           if (!estoque)
             errors+=$translate.instant('Home.view.Venda.SelectProduct')+'<br/>';
@@ -174,7 +174,6 @@
           return total;
         }
         
-        
         $scope.changePassword = function () {
 
             var user = { oldPassword: oldPassword.value, newPassword: newPassword.value, newPasswordConfirmation: newPasswordConfirmation.value };
@@ -233,36 +232,18 @@
                     handleStart.trigger('click');
                   }catch (e) {}
                 }
-                else
+                else {
+                  handleStart.trigger('click');
                   clearInterval(intervalStartInserting);
+                }
               },50);
-             
             }
           }
           else if ($scope.Venda)
             $scope.Venda.cancel();
-          
-          /*
-          $scope.$watch(
-            function () {
-              return location.hash
-            }, 
-            function (value) {
-              try {
-                if ($location.search().start && Venda) {
-                  if (!$scope.Venda.inserting) {
-                    var started;
-                  }
-                }
-                else if (Venda)
-                  Venda.cancel()
-              }
-              catch (e) { }
-            }
-          );*/
         });
         
-        $scope.loadDashboard = function() {
+         $scope.loadDashboard = function() {
           
             $http({
                 method: 'GET',
@@ -317,6 +298,5 @@
               }
               , function () { });
         }
-        
     }]);
 } (app));

@@ -93,10 +93,10 @@ public class VendaItemBusiness {
    * 
    * @generated
    */
-  public List<VendaItem> list ( Pageable pageable ){
+  public Page<VendaItem> list ( Pageable pageable ){
     // begin-user-code  
     // end-user-code        
-    List<VendaItem> result = repository.list (  pageable );
+    Page<VendaItem> result = repository.list (  pageable );
     // begin-user-code  
     // end-user-code        
     return result;

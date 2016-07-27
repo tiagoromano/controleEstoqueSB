@@ -51,7 +51,7 @@ public interface EstoqueDAO extends JpaRepository<Estoque, java.lang.String> {
    * @generated
    */
   @Query("select c from Estoque c")
-  public List<Estoque> list ( Pageable pageable );
+  public Page<Estoque> list ( Pageable pageable );
   
 
   /**
@@ -59,7 +59,7 @@ public interface EstoqueDAO extends JpaRepository<Estoque, java.lang.String> {
    * @generated
    */
   @Query("SELECT entity FROM VendaItem entity WHERE entity.estoque.id = :id")
-  public List<VendaItem> findVendaItem(@Param(value="id") java.lang.String id,  Pageable pageable );
+  public Page<VendaItem> findVendaItem(@Param(value="id") java.lang.String id,  Pageable pageable );
 
 
 
@@ -68,7 +68,7 @@ public interface EstoqueDAO extends JpaRepository<Estoque, java.lang.String> {
    * @generated
    */
   @Query("SELECT entity.venda FROM VendaItem entity WHERE entity.estoque.id = :id")
-  public List<Venda> listVenda(@Param(value="id") java.lang.String id,  Pageable pageable);
+  public Page<Venda> listVenda(@Param(value="id") java.lang.String id,  Pageable pageable);
 
     /**
      * ManyToOne Relation Delete

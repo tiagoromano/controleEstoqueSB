@@ -51,7 +51,7 @@ public interface ClienteDAO extends JpaRepository<Cliente, java.lang.String> {
    * @generated
    */
   @Query("select c from Cliente c")
-  public List<Cliente> list ( Pageable pageable );
+  public Page<Cliente> list ( Pageable pageable );
   
 
   /**
@@ -59,7 +59,7 @@ public interface ClienteDAO extends JpaRepository<Cliente, java.lang.String> {
    * @generated
    */
   @Query("SELECT entity FROM Venda entity WHERE entity.cliente.id = :id")
-  public List<Venda> findVenda(@Param(value="id") java.lang.String id,  Pageable pageable );
+  public Page<Venda> findVenda(@Param(value="id") java.lang.String id,  Pageable pageable );
 
 
 

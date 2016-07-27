@@ -3,6 +3,8 @@ package controleEstoque.rest;
 import org.springframework.data.domain.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.*;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.PagedResources;
 
 import org.springframework.http.*;
 import org.springframework.beans.factory.annotation.*;
@@ -89,8 +91,8 @@ public class ClienteREST {
    */
   @RequestMapping(method = RequestMethod.GET
   )    
-  public  List<Cliente> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return clienteBusiness.list(new PageRequest(offset, limit)   );  
+  public  HttpEntity<PagedResources<Cliente>> listParams (Pageable pageable, PagedResourcesAssembler assembler){
+      return new ResponseEntity<>(assembler.toResource(clienteBusiness.list(pageable   )), HttpStatus.OK);    
   }
 
   /**
@@ -99,8 +101,8 @@ public class ClienteREST {
    */
   @RequestMapping(method = RequestMethod.GET
   , value="/{instanceId}/Venda")    
-  public List<Venda> findVenda(@PathVariable("instanceId") java.lang.String instanceId, @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset) {
-    return clienteBusiness.findVenda(instanceId,  new PageRequest(offset, limit) );
+  public HttpEntity<PagedResources<Venda>> findVenda(@PathVariable("instanceId") java.lang.String instanceId, Pageable pageable, PagedResourcesAssembler assembler) {
+    return new ResponseEntity<>(assembler.toResource(clienteBusiness.findVenda(instanceId,  pageable )), HttpStatus.OK);
   }
 
   /**

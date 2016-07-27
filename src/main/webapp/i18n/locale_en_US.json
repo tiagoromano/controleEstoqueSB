@@ -90,5 +90,16 @@
   "Home.view.Venda.SelectProduct": "Select the product",
   "Home.view.Venda.InsertQtd": "Enter the amount",
   "Home.view.Venda.AtLeastOneProduct": "Insert at least one product in order to sell",
-  "Home.view.Venda.StockError": "There are only {1} items in stock for the product \"{0}\""
+  "Home.view.Venda.StockError": "There are only {1} items in stock for the product \"{0}\"",
+  "Home.view.Clientes": "Clients",
+  "Home.view.QuantidadeProdutos": "Amount of product",
+  "Home.view.Fornecedores": "Suppliers",
+  "Home.view.Vendas": "Sales ",
+  "Home.view.EfetuarVendas": "Make sales",
+  "Home.view.ProdutoSemEstoque": "Product out of stock",
+  "Home.view.FaturamentoMes": "Monthly billing",
+  "Home.view.ValorCompraValorVenda": "Value buying vs Selling value",
+  "Home.view.Data": "Date",
+  "Home.view.ValorCompra": "Value Buy",
+  "Home.view.ValorVenda": "Value Sale"
 }

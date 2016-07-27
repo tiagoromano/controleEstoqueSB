@@ -3,6 +3,8 @@ package controleEstoque.rest;
 import org.springframework.data.domain.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.*;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.PagedResources;
 
 import org.springframework.http.*;
 import org.springframework.beans.factory.annotation.*;
@@ -12,14 +14,13 @@ import java.util.*;
 
 import controleEstoque.entity.*;
 import controleEstoque.business.*;
-import controleEstoque.entity.Estoque;
 
 /**
  * Controller para expor serviços REST de Venda
  * 
  * @author Usu�rio de Teste
  * @version 1.0
- * @modified
+ * @generated
  **/
 @RestController
 @RequestMapping(value = "/api/rest/controleEstoque/Venda")
@@ -47,18 +48,13 @@ public class VendaREST {
 	@Qualifier("VendaItemBusiness")
 	private VendaItemBusiness vendaItemBusiness;
 
-	@Autowired
-	@Qualifier("CustomBusiness")
-	private CustomBusiness customBusiness;
-
 	/**
 	 * Serviço exposto para novo registro de acordo com a entidade fornecida
 	 * 
-	 * @modified
+	 * @generated
 	 */
 	@RequestMapping(method = RequestMethod.POST)
 	public Venda post(@Validated @RequestBody final Venda entity) throws Exception {
-
 		for (VendaItem v : entity.getVendaItens()) {
 			Estoque est = estoqueBusiness.get(v.getEstoque().getId());
 			est.setQuantidade(est.getQuantidade() - v.getQuantidade());
@@ -103,9 +99,8 @@ public class VendaREST {
 	 * @generated
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public List<Venda> listParams(@RequestParam(defaultValue = "100", required = false) Integer limit,
-			@RequestParam(defaultValue = "0", required = false) Integer offset) {
-		return vendaBusiness.list(new PageRequest(offset, limit));
+	public HttpEntity<PagedResources<Venda>> listParams(Pageable pageable, PagedResourcesAssembler assembler) {
+		return new ResponseEntity<>(assembler.toResource(vendaBusiness.list(pageable)), HttpStatus.OK);
 	}
 
 	/**
@@ -113,9 +108,8 @@ public class VendaREST {
 	 * @generated
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/getTotal")
-	public List<Venda> getTotalParams(@RequestParam(defaultValue = "100", required = false) Integer limit,
-			@RequestParam(defaultValue = "0", required = false) Integer offset) {
-		return vendaBusiness.getTotal(new PageRequest(offset, limit));
+	public HttpEntity<PagedResources<Venda>> getTotalParams(Pageable pageable, PagedResourcesAssembler assembler) {
+		return new ResponseEntity<>(assembler.toResource(vendaBusiness.getTotal(pageable)), HttpStatus.OK);
 	}
 
 	/**
@@ -123,10 +117,10 @@ public class VendaREST {
 	 * @generated
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/{instanceId}/VendaItem")
-	public List<VendaItem> findVendaItem(@PathVariable("instanceId") java.lang.String instanceId,
-			@RequestParam(defaultValue = "100", required = false) Integer limit,
-			@RequestParam(defaultValue = "0", required = false) Integer offset) {
-		return vendaBusiness.findVendaItem(instanceId, new PageRequest(offset, limit));
+	public HttpEntity<PagedResources<VendaItem>> findVendaItem(@PathVariable("instanceId") java.lang.String instanceId,
+			Pageable pageable, PagedResourcesAssembler assembler) {
+		return new ResponseEntity<>(assembler.toResource(vendaBusiness.findVendaItem(instanceId, pageable)),
+				HttpStatus.OK);
 	}
 
 	/**
@@ -165,10 +159,10 @@ public class VendaREST {
 	 * @generated
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/{instanceId}/Estoque")
-	public List<Estoque> listEstoque(@PathVariable("instanceId") java.lang.String instanceId,
-			@RequestParam(defaultValue = "100", required = false) Integer limit,
-			@RequestParam(defaultValue = "0", required = false) Integer offset) {
-		return vendaBusiness.listEstoque(instanceId, new PageRequest(offset, limit));
+	public HttpEntity<PagedResources<Estoque>> listEstoque(@PathVariable("instanceId") java.lang.String instanceId,
+			Pageable pageable, PagedResourcesAssembler assembler) {
+		return new ResponseEntity<>(assembler.toResource(vendaBusiness.listEstoque(instanceId, pageable)),
+				HttpStatus.OK);
 	}
 
 	/**

@@ -3,6 +3,8 @@ package controleEstoque.rest;
 import org.springframework.data.domain.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.*;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.PagedResources;
 
 import org.springframework.http.*;
 import org.springframework.beans.factory.annotation.*;
@@ -95,8 +97,8 @@ public class EstoqueREST {
    */
   @RequestMapping(method = RequestMethod.GET
   )    
-  public  List<Estoque> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return estoqueBusiness.list(new PageRequest(offset, limit)   );  
+  public  HttpEntity<PagedResources<Estoque>> listParams (Pageable pageable, PagedResourcesAssembler assembler){
+      return new ResponseEntity<>(assembler.toResource(estoqueBusiness.list(pageable   )), HttpStatus.OK);    
   }
 
   /**
@@ -105,8 +107,8 @@ public class EstoqueREST {
    */
   @RequestMapping(method = RequestMethod.GET
   , value="/{instanceId}/VendaItem")    
-  public List<VendaItem> findVendaItem(@PathVariable("instanceId") java.lang.String instanceId, @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset) {
-    return estoqueBusiness.findVendaItem(instanceId,  new PageRequest(offset, limit) );
+  public HttpEntity<PagedResources<VendaItem>> findVendaItem(@PathVariable("instanceId") java.lang.String instanceId, Pageable pageable, PagedResourcesAssembler assembler) {
+    return new ResponseEntity<>(assembler.toResource(estoqueBusiness.findVendaItem(instanceId,  pageable )), HttpStatus.OK);
   }
 
   /**
@@ -148,8 +150,8 @@ public class EstoqueREST {
    */
   @RequestMapping(method = RequestMethod.GET
   ,value="/{instanceId}/Venda")
-  public List<Venda> listVenda(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
-    return estoqueBusiness.listVenda(instanceId,  new PageRequest(offset, limit) );
+  public HttpEntity<PagedResources<Venda>> listVenda(@PathVariable("instanceId") java.lang.String instanceId,  Pageable pageable, PagedResourcesAssembler assembler ) {
+    return new ResponseEntity<>(assembler.toResource(estoqueBusiness.listVenda(instanceId,  pageable )), HttpStatus.OK); 
   }
 
   /**

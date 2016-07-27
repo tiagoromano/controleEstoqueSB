@@ -46,11 +46,7 @@ public class Venda implements Serializable {
 	@JoinColumn(name="fk_cliente", referencedColumnName = "id", insertable=true, updatable=true)
 	private Cliente cliente;
 	
-	
-	/**
-   * @modified
-   */
-  @OneToMany
+	@OneToMany
   @JoinColumn(name="fk_venda") 
   private List<VendaItem> vendaItens;
   
@@ -73,7 +69,7 @@ public class Venda implements Serializable {
   public void setVendaItens(List<VendaItem> itens) {
     this.vendaItens = itens;
   }
-	
+  
 	/**
 	 * Construtor
 	 * @generated

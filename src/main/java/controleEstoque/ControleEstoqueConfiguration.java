@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.*;
 /**
  * Classe que configura os beans para persistencia
  * 
- * @author Usuï¿½rio de Teste
+ * @author Usuário de Teste
  *
  */
 @Configuration
@@ -36,3 +36,5 @@ class ControleEstoqueConfiguration {
 
 
 }
+
+

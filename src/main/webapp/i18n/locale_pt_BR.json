@@ -90,5 +90,16 @@
   "Home.view.Venda.SelectProduct": "Selecione o produto",
   "Home.view.Venda.InsertQtd": "Insira a quantidade",
   "Home.view.Venda.AtLeastOneProduct": "Insira ao menos um produto para efetuar a venda",
-  "Home.view.Venda.StockError": "Existem apenas {1} item(ens) no estoque para o produto \"{0}\""
+  "Home.view.Venda.StockError": "Existem apenas {1} item(ens) no estoque para o produto \"{0}\"",
+  "Home.view.Clientes": "Cliente(s)",
+  "Home.view.QuantidadeProdutos": "Quantidade de produtos",
+  "Home.view.Fornecedores": "Fornecedor(es)",
+  "Home.view.Vendas": "Venda(s)",
+  "Home.view.EfetuarVendas": "Efetuar venda",
+  "Home.view.ProdutoSemEstoque": "Produto(s) sem estoque",
+  "Home.view.FaturamentoMes": "Fautramento do mês",
+  "Home.view.ValorCompraValorVenda": "Valor compra vs Valor venda",
+  "Home.view.Data": "Data",
+  "Home.view.ValorCompra": "Valor Compra",
+  "Home.view.ValorVenda": "Valor Venda"
 }

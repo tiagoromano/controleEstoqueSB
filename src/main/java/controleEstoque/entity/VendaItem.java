@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Classe que representa a tabela VENDAITEM
- * @modified
+ * @generated
  */
 @Entity
 @Table(name = "\"VENDAITEM\""
@@ -46,7 +46,7 @@ public class VendaItem implements Serializable {
 	private java.lang.Long quantidade;
 	
 	/**
-	 * @generated
+	 * @modified
 	 */
 	@JsonIgnore
 	@ManyToOne

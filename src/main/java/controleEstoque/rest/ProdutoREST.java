@@ -3,6 +3,8 @@ package controleEstoque.rest;
 import org.springframework.data.domain.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.validation.annotation.*;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.PagedResources;
 
 import org.springframework.http.*;
 import org.springframework.beans.factory.annotation.*;
@@ -95,8 +97,8 @@ public class ProdutoREST {
    */
   @RequestMapping(method = RequestMethod.GET
   )    
-  public  List<Produto> listParams (@RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset){
-      return produtoBusiness.list(new PageRequest(offset, limit)   );  
+  public  HttpEntity<PagedResources<Produto>> listParams (Pageable pageable, PagedResourcesAssembler assembler){
+      return new ResponseEntity<>(assembler.toResource(produtoBusiness.list(pageable   )), HttpStatus.OK);    
   }
 
   /**
@@ -105,8 +107,8 @@ public class ProdutoREST {
    */
   @RequestMapping(method = RequestMethod.GET
   , value="/{instanceId}/Estoque")    
-  public List<Estoque> findEstoque(@PathVariable("instanceId") java.lang.String instanceId, @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset) {
-    return produtoBusiness.findEstoque(instanceId,  new PageRequest(offset, limit) );
+  public HttpEntity<PagedResources<Estoque>> findEstoque(@PathVariable("instanceId") java.lang.String instanceId, Pageable pageable, PagedResourcesAssembler assembler) {
+    return new ResponseEntity<>(assembler.toResource(produtoBusiness.findEstoque(instanceId,  pageable )), HttpStatus.OK);
   }
 
   /**
@@ -148,8 +150,8 @@ public class ProdutoREST {
    */
   @RequestMapping(method = RequestMethod.GET
   ,value="/{instanceId}/Fornecedor")
-  public List<Fornecedor> listFornecedor(@PathVariable("instanceId") java.lang.String instanceId,  @RequestParam(defaultValue = "100", required = false) Integer limit, @RequestParam(defaultValue = "0", required = false) Integer offset ) {
-    return produtoBusiness.listFornecedor(instanceId,  new PageRequest(offset, limit) );
+  public HttpEntity<PagedResources<Fornecedor>> listFornecedor(@PathVariable("instanceId") java.lang.String instanceId,  Pageable pageable, PagedResourcesAssembler assembler ) {
+    return new ResponseEntity<>(assembler.toResource(produtoBusiness.listFornecedor(instanceId,  pageable )), HttpStatus.OK); 
   }
 
   /**

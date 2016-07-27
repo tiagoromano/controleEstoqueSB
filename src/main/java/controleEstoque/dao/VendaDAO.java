@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.*;
  * 
  * @see org.springframework.data.jpa.repository.JpaRepository
  * 
- * @modified
+ * @generated
  */
 @Repository("VendaDAO")
 @Transactional(transactionManager="controleEstoque-TransactionManager")
@@ -51,7 +51,7 @@ public interface VendaDAO extends JpaRepository<Venda, java.lang.String> {
    * @generated
    */
   @Query("select v from Venda v")
-  public List<Venda> list ( Pageable pageable );
+  public Page<Venda> list ( Pageable pageable );
   
   /**
    * Lista com paginação de acordo com a NamedQuery
@@ -59,7 +59,7 @@ public interface VendaDAO extends JpaRepository<Venda, java.lang.String> {
    * @generated
    */
   @Query("select count(v.id) from Venda v")
-  public List<Venda> getTotal ( Pageable pageable );
+  public Page<Venda> getTotal ( Pageable pageable );
   
 
   /**
@@ -67,7 +67,7 @@ public interface VendaDAO extends JpaRepository<Venda, java.lang.String> {
    * @generated
    */
   @Query("SELECT entity FROM VendaItem entity WHERE entity.venda.id = :id")
-  public List<VendaItem> findVendaItem(@Param(value="id") java.lang.String id,  Pageable pageable );
+  public Page<VendaItem> findVendaItem(@Param(value="id") java.lang.String id,  Pageable pageable );
 
 
 
@@ -76,7 +76,7 @@ public interface VendaDAO extends JpaRepository<Venda, java.lang.String> {
    * @generated
    */
   @Query("SELECT entity.estoque FROM VendaItem entity WHERE entity.venda.id = :id")
-  public List<Estoque> listEstoque(@Param(value="id") java.lang.String id,  Pageable pageable);
+  public Page<Estoque> listEstoque(@Param(value="id") java.lang.String id,  Pageable pageable);
 
     /**
      * ManyToOne Relation Delete

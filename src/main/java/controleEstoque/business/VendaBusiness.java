@@ -93,10 +93,10 @@ public class VendaBusiness {
    * 
    * @generated
    */
-  public List<Venda> list ( Pageable pageable ){
+  public Page<Venda> list ( Pageable pageable ){
     // begin-user-code  
     // end-user-code        
-    List<Venda> result = repository.list (  pageable );
+    Page<Venda> result = repository.list (  pageable );
     // begin-user-code  
     // end-user-code        
     return result;
@@ -106,10 +106,10 @@ public class VendaBusiness {
    * 
    * @generated
    */
-  public List<Venda> getTotal ( Pageable pageable ){
+  public Page<Venda> getTotal ( Pageable pageable ){
     // begin-user-code  
     // end-user-code        
-    List<Venda> result = repository.getTotal (  pageable );
+    Page<Venda> result = repository.getTotal (  pageable );
     // begin-user-code  
     // end-user-code        
     return result;
@@ -121,10 +121,10 @@ public class VendaBusiness {
    * @generated modifiable
    * OneToMany Relation
    */  
-  public List<VendaItem> findVendaItem(java.lang.String id,  Pageable pageable) {
+  public Page<VendaItem> findVendaItem(java.lang.String id,  Pageable pageable) {
       // begin-user-code
       // end-user-code  
-      List<VendaItem> result = repository.findVendaItem(id,  pageable );
+      Page<VendaItem> result = repository.findVendaItem(id,  pageable );
       // begin-user-code  
       // end-user-code        
       return result;	  
@@ -136,10 +136,10 @@ public class VendaBusiness {
    * @generated modifiable
    * ManyToMany Relation
    */  
-  public List<Estoque> listEstoque(java.lang.String id,  Pageable pageable ) {
+  public Page<Estoque> listEstoque(java.lang.String id,  Pageable pageable ) {
       // begin-user-code
       // end-user-code  
-      List<Estoque> result = repository.listEstoque(id,  pageable );
+      Page<Estoque> result = repository.listEstoque(id,  pageable );
       // begin-user-code
       // end-user-code
       return result;        	  

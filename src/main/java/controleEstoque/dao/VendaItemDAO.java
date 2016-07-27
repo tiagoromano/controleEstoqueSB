@@ -51,7 +51,7 @@ public interface VendaItemDAO extends JpaRepository<VendaItem, java.lang.String>
    * @generated
    */
   @Query("select v from VendaItem v")
-  public List<VendaItem> list ( Pageable pageable );
+  public Page<VendaItem> list ( Pageable pageable );
   
 
 
