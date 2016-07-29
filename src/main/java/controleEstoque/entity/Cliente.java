@@ -66,7 +66,7 @@ public class Cliente implements Serializable {
 	/**
 	 * @generated
 	 */
-	@Column(name = "estado", nullable = false, unique = false, insertable=true, updatable=true)
+	@Column(name = "estado", nullable =false, unique = false, insertable=true, updatable=true)
 	private java.lang.String estado;
 	
 	

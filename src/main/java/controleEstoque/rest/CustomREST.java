@@ -34,6 +34,8 @@ public class CustomREST {
 	@PersistenceContext(unitName = "controleEstoque")
   private EntityManager entityManager;
 
+
+  //Obtem informações do dashboard - primeira parte
 	@RequestMapping(method = RequestMethod.GET, value = "/DashboardInfo")
 	public DashboardInfoDTO getDashboardInfo() throws Exception {
 
@@ -45,6 +47,7 @@ public class CustomREST {
 		return info;
 	}
 	
+	//Obtem  info do grafico Faturamento do mês 
 	@RequestMapping(method = RequestMethod.GET, value = "/Faturamento")
 	public List<FaturamentoInfoDTO> getFaturamentoMes() throws Exception {
 	  
@@ -72,6 +75,7 @@ public class CustomREST {
 	  return listFat;
 	}
 	
+	//Obtem info do grafico quantidade de produtos
 	@RequestMapping(method = RequestMethod.GET, value = "/ProdutoEstoque")
 	public List<LabelValueDTO> getProdutoEstoque() throws Exception {
 	  
