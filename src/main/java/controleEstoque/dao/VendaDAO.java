@@ -44,6 +44,8 @@ public interface VendaDAO extends JpaRepository<Venda, java.lang.String> {
   @Modifying
   @Query("DELETE FROM Venda entity WHERE entity.id = :id")
   public void delete(@Param(value="id") java.lang.String id);
+  
+  
 
   /**
    * Lista com paginação de acordo com a NamedQuery

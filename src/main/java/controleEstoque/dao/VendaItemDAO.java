@@ -53,7 +53,9 @@ public interface VendaItemDAO extends JpaRepository<VendaItem, java.lang.String>
   @Query("select v from VendaItem v")
   public Page<VendaItem> list ( Pageable pageable );
   
-
+  @Modifying
+  @Query("DELETE FROM VendaItem entity WHERE entity.venda.id = :id")
+  public void deleteVendaItemFromVendaId(@Param(value="id") java.lang.String id);
 
 
 

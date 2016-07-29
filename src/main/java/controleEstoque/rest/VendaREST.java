@@ -1,19 +1,26 @@
 package controleEstoque.rest;
 
-import org.springframework.data.domain.*;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.validation.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.PagedResources;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-import org.springframework.http.*;
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.*;
-
-import controleEstoque.entity.*;
-import controleEstoque.business.*;
+import controleEstoque.business.EstoqueBusiness;
+import controleEstoque.business.VendaBusiness;
+import controleEstoque.business.VendaItemBusiness;
+import controleEstoque.entity.Estoque;
+import controleEstoque.entity.Venda;
+import controleEstoque.entity.VendaItem;
 
 /**
  * Controller para expor serviços REST de Venda
@@ -91,6 +98,7 @@ public class VendaREST {
 	 */
 	@RequestMapping(method = RequestMethod.DELETE, value = "/{id}")
 	public void delete(@PathVariable("id") java.lang.String id) throws Exception {
+		vendaItemBusiness.deleteVendaItemFromVendaId(id);
 		vendaBusiness.delete(id);
 	}
 

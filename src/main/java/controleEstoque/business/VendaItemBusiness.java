@@ -85,6 +85,14 @@ public class VendaItemBusiness {
       // begin-user-code  
       // end-user-code        
     }
+    
+    public void deleteVendaItemFromVendaId( java.lang.String id) throws Exception {
+      // begin-user-code  
+      // end-user-code        
+      repository.deleteVendaItemFromVendaId(id);
+      // begin-user-code  
+      // end-user-code        
+    }
 
     // CRUD
     

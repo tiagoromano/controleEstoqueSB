@@ -68,7 +68,8 @@ class ControleEstoqueConfiguration {
 
 		Jackson2RepositoryPopulatorFactoryBean factory = new Jackson2RepositoryPopulatorFactoryBean();
 		// Set a custom ObjectMapper if Jackson customization is needed
-		factory.setResources(new Resource[] { sourceData, sourceDataGenerated });
+		//factory.setResources(new Resource[] { sourceData, sourceDataGenerated });
+		factory.setResources(new Resource[] { sourceData });
 		return factory;
 	}
 

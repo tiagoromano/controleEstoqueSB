@@ -221,22 +221,25 @@
             $('#morris-bar-chart').data('started',true);
             $scope.loadDashboard();
           }
+          if($location.url() === '/home/logged/venda?start'){
+            var handleStart = $('#btnNewVenda');
           
-          
-          if ($location.search().start && $scope.Venda) {
-            if (!$scope.Venda.inserting) {
-              var handleStart = $('#btnNewVenda');
-              var intervalStartInserting  = setInterval(function() {
-                if ($scope.getTotalVenda() > 0) {
-                  try {
-                    handleStart.trigger('click');
-                  }catch (e) {}
+            var forceIndex = 0;
+            var forceStart = setInterval(function() {
+              if ($scope.Venda.active.$$hashKey) {
+                startNew();
+              }
+              else {
+                forceIndex++;
+                if (forceIndex > 10 && $scope.Venda.data.length === 0) {
+                  startNew();  
                 }
-                else {
-                  handleStart.trigger('click');
-                  clearInterval(intervalStartInserting);
-                }
-              },50);
+              }
+            },100);
+            
+            var startNew = function() {
+              handleStart.trigger('click');
+              clearInterval(forceStart);
             }
           }
           else if ($scope.Venda)
