@@ -1,31 +1,22 @@
 <div class="component-holder ng-binding ng-scope" data-component="crn-sidebar" id="crn-sidebar-751554"> 
-  <nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#/home"><img src="img/logo-box-blue.jpg" class="" width="" height="45"> </a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="component-holder" data-component="crn-sidebar-item"><a href="#/home" class=""><i class="fa fa-lg fa-home"></i><span class="">{{"Home.view.Home" | translate}}</span></a></li>
-        <li class="dropdown">
-          <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-users fa-lg"></i> <span class="">{{"Home.view.Admin" | translate}}</span>  <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#/home/admin/users" class="component-holder" data-component="crn-anchor">{{"Home.view.Users" | translate}}</a></li> 
-            <li><a href="#/home/admin/roles" class="component-holder" data-component="crn-anchor">{{"Home.view.Roles" | translate}}</a></li> 
-            <li><a href="#/home/admin/permission" class="component-holder" data-component="crn-anchor">{{"Home.view.Permission" | translate}}</a></li> 
-          </ul>
-        </li>
-        
-        <li class="dropdown"> <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-list-alt"></i> <span class="">{{"Home.view.Cadastro" | translate}}</span> <span class="caret"></span></a> 
+  <nav class="navbar navbar-default"> 
+    <div class="container-fluid"> 
+      <!-- Brand and toggle get grouped for better mobile display --> 
+      <div class="navbar-header"> 
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> 
+        <a class="navbar-brand" href="#/home"><img src="img/logo-box-blue.jpg" class="" width="" height="45"> </a> 
+      </div> 
+      <!-- Collect the nav links, forms, and other content for toggling --> 
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"> 
+        <ul class="nav navbar-nav"> 
+          <li class="component-holder" data-component="crn-sidebar-item"><a href="#/home" class=""><i class="fa fa-lg fa-home"></i><span class="">{{"Home.view.Home" | translate}}</span></a></li> 
+          <li class="dropdown"> <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-users fa-lg"></i> <span class="">{{"Home.view.Admin" | translate}}</span> <span class="caret"></span></a> 
+            <ul class="dropdown-menu"> 
+              <li><a href="#/home/admin/users" class="component-holder" data-component="crn-anchor">{{"Home.view.Users" | translate}}</a></li> 
+              <li><a href="#/home/admin/roles" class="component-holder" data-component="crn-anchor">{{"Home.view.Roles" | translate}}</a></li> 
+              <li><a href="#/home/admin/permission" class="component-holder" data-component="crn-anchor">{{"Home.view.Permission" | translate}}</a></li> 
+            </ul> </li> 
+          <li class="dropdown"> <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-list-alt"></i> <span class="">{{"Home.view.Cadastro" | translate}}</span> <span class="caret"></span></a> 
             <ul class="dropdown-menu"> 
               <li><a href="#/home/logged/fornecedor" class="component-holder" data-component="crn-anchor">{{"Home.view.Fornecedor" | translate}}</a></li> 
               <li><a href="#/home/logged/cliente" class="component-holder" data-component="crn-anchor">{{"Home.view.Cliente" | translate}}</a></li> 
@@ -33,33 +24,32 @@
               <li><a href="#/home/logged/estoque" class="component-holder" data-component="crn-anchor">{{"Home.view.Estoque" | translate}}</a></li> 
               <li><a href="#/home/logged/venda" class="component-holder" data-component="crn-anchor">{{"Home.view.Venda" | translate}}</a></li> 
             </ul> </li> 
-          <li class="component-holder" data-component="crn-sidebar-item"><a href="#/home/logged/venda?start" class=""><i class="glyphicon glyphicon-usd"></i> <span class="">{{"Home.view.Venda" | translate}}</span></a></li>
-        
-      </ul>
-      <!-- <form class="navbar-form navbar-left" role="search">
+          <li class="component-holder" data-component="crn-sidebar-item"><a href="#/home/logged/venda?start" class=""><i class="glyphicon glyphicon-usd"></i> <span class="">{{"Home.view.Venda" | translate}}</span></a></li> 
+        </ul> 
+        <!-- <form class="navbar-form navbar-left" role="search">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search">
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
-      </form> -->
-      <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img class="user-avatar" alt="{{session.name}}" ng-src="{{session.picture || 'img/nophoto.png'}}"> <span class="">{{session.name}}</span> <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a class="component-holder" data-toggle="modal" data-target="#modalPassword" data-component="crn-anchor">{{"Home.view.ChangePassword" | translate}}</a></li>
-            <li ng-click="logout()"><a href="javascript:void(0);"><span class="">{{"Home.view.Logout" | translate}}</span></a></li>
-          </ul>
-        </li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
+      </form> --> 
+        <ul class="nav navbar-nav navbar-right"> 
+          <li class="dropdown"> <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img class="user-avatar" alt="{{session.name}}" ng-src="{{session.picture || 'img/nophoto.png'}}"> <span class="">{{session.name}}</span> <span class="caret"></span></a> 
+            <ul class="dropdown-menu"> 
+              <li><a class="component-holder" data-toggle="modal" data-target="#modalPassword" data-component="crn-anchor">{{"Home.view.ChangePassword" | translate}}</a></li> 
+              <li ng-click="logout()"><a href="javascript:void(0);"><span class="">{{"Home.view.Logout" | translate}}</span></a></li> 
+            </ul> </li> 
+        </ul> 
+      </div>
+      <!-- /.navbar-collapse --> 
+    </div>
+    <!-- /.container-fluid --> 
+  </nav> 
   <div ui-view="" class="container-fluid main-view"> 
-     <div id="page-wrapper" > 
+    <div id="page-wrapper"> 
       <div class="component-holder ng-binding ng-scope" data-component="crn-datasource" id="crn-datasource-924233"> 
         <datasource name="" entity="" keys="" rows-per-page="100" on-before-create="" on-after-create="" on-before-update="" on-after-update="" on-before-delete="" on-after-delete=""></datasource> 
       </div> 
-      <div class="row" > 
+      <div class="row"> 
         <div class="col-lg-12"> 
           <h1 class="page-header">Dashboard</h1> 
         </div> 
@@ -79,7 +69,7 @@
                      {{dashboard.totalCliente}} 
                   </div> 
                   <div>
-                     {{"Home.view.Clientes" | translate}}
+                     {{"Home.view.Clientes" | translate}} 
                   </div> 
                 </div> 
               </div> 
@@ -101,10 +91,10 @@
                 </div> 
                 <div class="col-xs-9 text-right"> 
                   <div class="huge">
-                     {{dashboard.totalFornecedor}}
+                     {{dashboard.totalFornecedor}} 
                   </div> 
                   <div>
-                     {{"Home.view.Fornecedores" | translate}}
+                     {{"Home.view.Fornecedores" | translate}} 
                   </div> 
                 </div> 
               </div> 
@@ -129,7 +119,7 @@
                      {{dashboard.totalVenda}} 
                   </div> 
                   <div>
-                     {{"Home.view.Vendas" | translate}}
+                     {{"Home.view.Vendas" | translate}} 
                   </div> 
                 </div> 
               </div> 
@@ -175,7 +165,6 @@
             <div class="panel-heading"> 
               <i class="fa fa-bar-chart-o fa-fw"></i>{{"Home.view.FaturamentoMes" | translate}} 
               <div class="pull-right"> 
-                
               </div> 
             </div> 
             <!-- /.panel-heading --> 
@@ -189,13 +178,19 @@
             <div class="panel-heading"> 
               <i class="fa fa-bar-chart-o fa-fw"></i>{{"Home.view.ValorCompraValorVenda" | translate}} 
               <div class="pull-right"> 
-                 
               </div> 
             </div> 
             <!-- /.panel-heading --> 
             <div class="panel-body"> 
               <div class="row"> 
-                <div class="col-lg-4"> 
+                <!-- /.col-lg-4 (nested) --> 
+                <div class="col-lg-12"> 
+                  <div id="morris-bar-chart"></div> 
+                </div> 
+                <!-- /.col-lg-8 (nested) --> 
+              </div> 
+              <div class="row"> 
+                <div class="col-lg-12" style="height: 200px;overflow: auto;"> 
                   <div class="table-responsive"> 
                     <table class="table table-bordered table-hover table-striped"> 
                       <thead> 
@@ -211,28 +206,20 @@
                           <td>{{rowData.valorCompraDia | number : 2}} </td> 
                           <td>{{rowData.valorVendaDia | number : 2}}</td> 
                         </tr> 
-                        
                       </tbody> 
                     </table> 
                   </div> 
                   <!-- /.table-responsive --> 
                 </div> 
-                <!-- /.col-lg-4 (nested) --> 
-                <div class="col-lg-8"> 
-                  <div id="morris-bar-chart"></div> 
-                </div> 
-                <!-- /.col-lg-8 (nested) --> 
               </div> 
               <!-- /.row --> 
             </div> 
             <!-- /.panel-body --> 
           </div> 
           <!-- /.panel --> 
-         
           <!-- /.panel --> 
         </div> 
         <!-- /.col-lg-8 --> 
-        
         <div class="col-lg-4"> 
           <div class="panel panel-default"> 
             <div class="panel-heading"> 
@@ -242,7 +229,7 @@
             <div class="panel-body"> 
               <div class="list-group"> 
                 <a href="#/home/admin/users" class="list-group-item"> <i class="glyphicon glyphicon-user"></i> {{"Home.view.Users" | translate}} </a> 
-                <a href="#/home/admin/roles" class="list-group-item"> <i class="glyphicon glyphicon-th-large"></i> {{"Home.view.Roles" | translate}}  </a> 
+                <a href="#/home/admin/roles" class="list-group-item"> <i class="glyphicon glyphicon-th-large"></i> {{"Home.view.Roles" | translate}} </a> 
                 <a href="#/home/admin/permission" class="list-group-item"> <i class="glyphicon glyphicon-cog"></i> {{"Home.view.Permission" | translate}} </a> 
               </div> 
               <!-- /.list-group --> 
@@ -252,7 +239,7 @@
           <!-- /.panel --> 
           <div class="panel panel-default"> 
             <div class="panel-heading"> 
-              <i class="fa fa-bar-chart-o fa-fw"></i> {{"Home.view.QuantidadeProdutos" | translate}}  
+              <i class="fa fa-bar-chart-o fa-fw"></i> {{"Home.view.QuantidadeProdutos" | translate}} 
             </div> 
             <div class="panel-body"> 
               <div id="morris-donut-chart"></div> 
@@ -261,14 +248,12 @@
             <!-- /.panel-body --> 
           </div> 
           <!-- /.panel --> 
-          
           <!-- /.panel .chat-panel --> 
         </div> 
-
         <!-- /.col-lg-4 --> 
       </div> 
       <!-- /.row --> 
-    </div>
+    </div> 
   </div> 
 </div> 
 <div class="modal fade" id="modalPassword"> 
