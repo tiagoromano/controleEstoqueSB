@@ -1,4 +1,5 @@
-<div class="container-fluid">
+<div class="component-holder panel panel-default"> 
+    <div class="container-fluid">
 	<h3>{{'Permission.view.Permission' | translate}}</h3>
 	<div class="row">
 		<div class="col-xs-12">
@@ -22,8 +23,7 @@
 				<button class="btn btn-primary btn-sm" type="submit" onclick=""
 					ng-click="Permission.startInserting()"
 					ng-hide="Permission.editing || Permission.inserting">
-					<i class="fa fa-lock"></i> <span class="">{{'Permission.view.Add
-						New Permission' | translate}}</span>
+					<i class="glyphicon glyphicon-cog"></i> <span class="">Adicinar nova permissão</span>
 				</button>
 			</div>
 			</p>
@@ -167,11 +167,11 @@
 					</fieldset>
 					<div class="active-bar pull-right"
 						ng-hide="!datasource.editing &amp;&amp; !datasource.inserting">
-						<button class="btn btn-success" ng-click="datasource.post()">
-							<i class="glyphicon glyphicon-ok"></i>
+						<button class="btn btn-success btn-sm" ng-click="datasource.post()">
+							Salvar
 						</button>
-						<button class="btn btn-danger" ng-click="datasource.cancel()">
-							<i class="glyphicon glyphicon-remove"></i>
+						<button class="btn btn-danger btn-sm" ng-click="datasource.cancel()">
+							Cancelar
 						</button>
 					</div>
 				</form>
@@ -179,4 +179,5 @@
 		</div>
 	</div>
 
+</div>
 </div>

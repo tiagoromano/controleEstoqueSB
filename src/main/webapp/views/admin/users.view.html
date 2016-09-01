@@ -1,20 +1,28 @@
+
+<div class="component-holder panel panel-default"> 
 <div class="container-fluid">
-	<h3>{{'Users.view.Users' | translate}}</h3>
-	<div class="component-holder ng-binding ng-scope ui-draggable ui-draggable-handle" data-component="crn-datasource" id="crn-datasource-763276"> 
-	  <i data-container="true" class="wrapped-node wrapped-node-datasource" draggable="true"><datasource name="User" entity="api/rest/security/User" keys="id" rows-per-page="100" class="" delete-message="{{'Users.view.RemoverUsuario' | translate}}?"></datasource></i> 
-	</div> 
-	<div class="component-holder ng-binding ng-scope ui-draggable ui-draggable-handle" data-component="crn-datasource" id="crn-datasource-276971"> 
-	  <i data-container="true" class="wrapped-node wrapped-node-datasource" draggable="true"><datasource name="AllRoles" entity="api/rest/security/Role" keys="id" rows-per-page="100" class=""></datasource></i> 
-	</div> 
-	<div class="row">
-		<div class="col-xl-12 component-holder ng-binding ng-scope ui-draggable ui-draggable-handle" data-component="crn-button" id="crn-button-564202">
-			<p>
-				<button type="button" class="btn btn-primary btn-sm" ng-click="User.startInserting()" ng-hide="User.inserting || User.editing"><i class="fa fa-user"></i> <span class="">{{'Users.view.Add A New User' | translate}}</span> </button>
-			</p>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-xl-12 component-holder ng-binding ng-scope ui-draggable ui-draggable-handle" data-component="crn-grid" id="crn-grid-852138">
+    
+            	<h3>{{'Users.view.Users' | translate}}</h3>
+    <div class="">
+    		<div class="">
+            	<div class="component-holder ng-binding ng-scope ui-draggable ui-draggable-handle" data-component="crn-datasource" id="crn-datasource-763276"> 
+            	  <i data-container="true" class="wrapped-node wrapped-node-datasource" draggable="true"><datasource name="User" entity="api/rest/security/User" keys="id" rows-per-page="100" class="" delete-message="{{'Users.view.RemoverUsuario' | translate}}?"></datasource></i> 
+            	</div> 
+            	<div class="component-holder ng-binding ng-scope ui-draggable ui-draggable-handle" data-component="crn-datasource" id="crn-datasource-276971"> 
+            	  <i data-container="true" class="wrapped-node wrapped-node-datasource" draggable="true"><datasource name="AllRoles" entity="api/rest/security/Role" keys="id" rows-per-page="100" class=""></datasource></i> 
+            	</div> 
+            	<div class="">
+            		<div class="component-holder ng-binding ng-scope ui-draggable ui-draggable-handle" data-component="crn-button" id="crn-button-564202">
+            			<p>
+            				<button type="button" class="btn btn-primary btn-sm" ng-click="User.startInserting()" ng-hide="User.inserting || User.editing"><i class="fa fa-user"></i> <span class="">{{'Users.view.Add A New User' | translate}}</span> </button>
+            			</p>
+            		</div>
+            	</div>
+            </div>
+        </div>
+        	
+	<div class="">
+		<div class="component-holder ng-binding ng-scope ui-draggable ui-draggable-handle" data-component="crn-grid" id="crn-grid-852138">
 			<div crn-datasource="User" class="table-responsive panel panel-primary" ng-hide="User.editing || User.inserting">
 				<table class="table table-bordered table-hover"> 
 			      <thead> 
@@ -64,7 +72,7 @@
 		      <button class="btn btn-default btn-block btn-clicked" ng-show="datasource.hasNextPage()" ng-click="datasource.nextPage()">{{'Users.view.Load More' | translate}}... </button> 
 		    </div> 
 		</div>
-		<div class="col-xl-12 component-holder ng-binding ng-scope ui-draggable ui-draggable-handle" data-component="crn-form" id="crn-form-319115">
+		<div class="component-holder ng-binding ng-scope ui-draggable ui-draggable-handle" data-component="crn-form" id="crn-form-319115">
 			<div class="form" ng-show="User.editing || User.inserting"> 
 			    <form crn-datasource="User" class="col-xs-12 col-sm-5"> 
 			      <fieldset ng-disabled="!datasource.editing &amp;&amp; !datasource.inserting"> 
@@ -106,13 +114,14 @@
 			            </ui-select> 
 			          </div> 
 			        </div>
-			      <div class="active-bar pull-right" ng-hide="!datasource.editing &amp;&amp; !datasource.inserting"> 
-			        <button class="btn btn-success" ng-click="datasource.post()"><i class="glyphicon glyphicon-ok"></i> </button> 
-			        <button class="btn btn-danger" ng-click="datasource.cancel()"><i class="glyphicon glyphicon-remove"></i> </button> 
+			      <div class="active-bar pull-right margem-baixo20" ng-hide="!datasource.editing &amp;&amp; !datasource.inserting"> 
+			        <button class="btn btn-success btn-sm" ng-click="datasource.post()">Salvar</button> 
+			        <button class="btn btn-danger btn-sm" ng-click="datasource.cancel()">Cancelar</button> 
 			      </div> 
 			      </fieldset> 
 			    </form> 
 			</div> 
 		</div>	
 	</div>
+</div>
 </div>
