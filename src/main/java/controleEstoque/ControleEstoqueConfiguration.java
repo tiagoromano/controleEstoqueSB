@@ -25,7 +25,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 /**
  * Classe que configura os beans para persistencia
  * 
- * @author Usu�rio de Teste
+ * @author Usuário de Teste
  *
  */
 @Configuration

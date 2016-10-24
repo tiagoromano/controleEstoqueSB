@@ -3,7 +3,7 @@ package controleEstoque.entity;
 /**
  * Classe que representa ...
  * 
- * @author Usu�rio de Teste
+ * @author Usuário de Teste
  * @version 1.0
  * @since 2016-07-22
  *

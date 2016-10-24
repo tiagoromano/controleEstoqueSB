@@ -11,7 +11,7 @@ import org.springframework.test.context.jdbc.Sql;
  *  - Atualizar o contexto de aplicação para carregar os singletons
  *  - Executar qualquer bean do tipo CommandLineRunner 
  * 
- * @author Usu�rio de Teste
+ * @author Usuário de Teste
  *
  */
 @ComponentScan(basePackages = { "security", "controleEstoque", "auth.permission" })

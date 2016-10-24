@@ -25,7 +25,7 @@ import controleEstoque.entity.VendaItem;
 /**
  * Controller para expor serviços REST de Venda
  * 
- * @author Usu�rio de Teste
+ * @author Usuário de Teste
  * @version 1.0
  * @generated
  **/

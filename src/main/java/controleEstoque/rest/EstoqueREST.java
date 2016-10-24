@@ -19,7 +19,7 @@ import controleEstoque.business.*;
 /**
  * Controller para expor serviços REST de Estoque
  * 
- * @author Usu�rio de Teste
+ * @author Usuário de Teste
  * @version 1.0
  * @generated
  **/
