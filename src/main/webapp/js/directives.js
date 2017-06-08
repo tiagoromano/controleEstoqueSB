@@ -97,6 +97,21 @@
       };
   })
   
+  .directive('ngDestroy', function () {
+    return {
+      restrict: 'A',
+      link: function(scope, element, attrs, ctrl) {
+        element.on('$destroy', function() {
+          if (attrs.ngDestroy && attrs.ngDestroy.length > 0)
+            if (attrs.ngDestroy.indexOf('app.') > -1 || attrs.ngDestroy.indexOf('blockly.') > -1) 
+              scope.$eval(attrs.ngDestroy);
+            else
+              eval(attrs.ngDestroy);
+        });
+      }
+    }
+  })
+  
   .directive('pwCheck', [function () { 'use strict';
     return {
       require: 'ngModel',
@@ -111,4 +126,30 @@
       }
     }
   }])
+  
+  /**
+   * Validação de campos CPF e CNPJ,
+   * para utilizar essa diretiva, adicione o atributo valid com o valor 
+   * do tipo da validação (cpf ou cnpj). Exemplo <input type="text" valid="cpf"> 
+   */
+  .directive('valid', function () {
+      return {
+          require: '^ngModel',
+          restrict: 'A',
+          link: function (scope, element, attrs, ngModel) {
+            var validator = {'cpf': CPF, 'cnpj': CNPJ};
+            
+            ngModel.$validators[attrs.valid] = function(modelValue, viewValue) {
+              var value = modelValue || viewValue;
+              var fieldValid =  validator[attrs.valid].isValid(value);
+              if(!fieldValid){
+                element[0].setCustomValidity(element[0].dataset['errorMessage']);
+              }else{
+                element[0].setCustomValidity("");
+              }
+              return (fieldValid || !value);
+            };
+          }
+      }
+  })
 } (app));

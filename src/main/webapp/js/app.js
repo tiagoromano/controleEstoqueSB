@@ -133,8 +133,8 @@ var app = (function() {
 
     // General controller
     .controller('PageController',["$scope","$stateParams","$location","$http",function($scope, $stateParams, $location, $http){
-      for(var x in app.userEvents)
-        $scope[x]= app.userEvents[x].bind($scope);
+      
+      app.registerEventsCronapi($scope);
       
       // save state params into scope
       $scope.params = $stateParams;
@@ -147,6 +147,18 @@ var app = (function() {
           $scope.params[key] = queryStringParams[key];
         }
       }
+      
+      //Components personalization jquery
+      $scope.registerComponentScripts = function() {
+        //carousel slider
+        $('.carousel-indicators li').on('click', function() {
+          var currentCarousel = '#' + $(this).parent().parent().parent().attr('id');
+          var index = $(currentCarousel + ' .carousel-indicators li').index(this);
+          $(currentCarousel + ' #carousel-example-generic').carousel(index);
+        });
+      }
+      
+      $scope.registerComponentScripts();
     }])
     
     .run(function($rootScope,$state) {
@@ -169,3 +181,42 @@ app.userEvents = {};
 //Configuration
 app.config = {};
 app.config.datasourceApiVersion = 2;
+
+app.registerEventsCronapi = function($scope){
+  for(var x in app.userEvents)
+    $scope[x]= app.userEvents[x].bind($scope);
+  
+  $scope.vars = {};
+  
+  try {
+    if (cronapi) {
+      $scope['cronapi'] = cronapi;
+      $scope['cronapi'].$scope =  $scope;
+      $scope.safeApply = safeApply;
+    }
+  }
+  catch (e)  {
+    console.info('Not loaded cronapi functions');
+    console.info(e);
+  }
+  try {
+    if (blockly)
+      $scope['blockly'] = blockly;  
+  }
+  catch (e)  {
+    console.info('Not loaded blockly functions');
+    console.info(e);
+  }
+};
+
+window.safeApply = function(fn) {
+  var phase = this.$root.$$phase;
+  if(phase == '$apply' || phase == '$digest') {
+    if(fn && (typeof (fn) === 'function')) {
+      fn();
+    }
+  }
+  else {
+    this.$apply(fn);
+  }
+};

@@ -3,8 +3,9 @@
 
     app.controller('LoginController', ['$scope', '$http', '$location', '$rootScope', '$window', '$state', '$translate', 'Notification', function ($scope, $http, $location, $rootScope, $window, $state, $translate, Notification) {
 
+        app.registerEventsCronapi($scope);
+        
         $scope.message = {};
-
         $scope.login = function () {
 
             $scope.message.error = undefined;
@@ -46,6 +47,8 @@
     }]);
 
     app.controller('HomeController', ['$scope', '$http', '$rootScope', '$state', '$translate', 'Notification', '$location', function ($scope, $http, $rootScope, $state, $translate, Notification, $location) {
+        
+        app.registerEventsCronapi($scope);
         
         $scope.message = {};
         $scope.dashboard = {};
@@ -303,3 +306,14 @@
         }
     }]);
 } (app));
+window.safeApply = function(fn) {
+  var phase = this.$root.$$phase;
+  if(phase == '$apply' || phase == '$digest') {
+    if(fn && (typeof (fn) === 'function')) {
+      fn();
+    }
+  }
+  else {
+    this.$apply(fn);
+  }
+};

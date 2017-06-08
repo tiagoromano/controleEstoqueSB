@@ -90,11 +90,16 @@ public class AuthorizationConfigurer extends WebSecurityConfigurerAdapter {
     // public
     String [] publics = {"/favicon.ico", "/index.html", "/views/login.view.html", "/public/**", "/plugins/**", "/components/**", "/js/**", "/css/**", "/img/**", "/i18n/**", "/views/error/**"};
 		http.authorizeRequests().antMatchers(publics).permitAll();
-    
+		
+    http.authorizeRequests().antMatchers("/api/rest/**").authenticated();
+    http.authorizeRequests().antMatchers("/api/cronapi/call/**").authenticated();
+
     List<Permission> permissions = permissionRepository.findAll();
     for(Permission p : permissions) {
 			http.authorizeRequests().antMatchers(method(p.getVerb()), p.getPath()).hasAuthority(p.getRole().getName());
     }
+    
+    
     
 		// denyAll
 		http.authorizeRequests().antMatchers("/**").denyAll();

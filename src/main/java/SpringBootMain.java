@@ -14,7 +14,7 @@ import org.springframework.test.context.jdbc.Sql;
  * @author Usuário de Teste
  *
  */
-@ComponentScan(basePackages = { "security", "controleEstoque", "auth.permission" })
+@ComponentScan(basePackages = { "security", "controleEstoque", "auth.permission", "api.rest.events", "api.rest.webservices", "reports", "app", "cronapi", "blockly" })
 @SpringBootApplication
 public class SpringBootMain extends SpringBootServletInitializer {
 
